@@ -1,0 +1,22 @@
+<script src="./gbk.js"></script>
+<script >
+function toGbkBytes(str){
+	var str = $URL.encode(str)
+	var byteArr = new Array();
+	for(var i=0; i<str.length;i++){
+		var ch = str.charAt(i);
+		if(ch == '%'){
+		     var num = str.charAt(i+1) + str.charAt(i+2);
+		     num = parseInt(num,16);
+		     num = num | (-1 << 8);
+		     byteArr.push(num);
+		     i+=2;
+		}else{
+			byteArr.push(ch.charCodeAt());
+		}
+	}
+	return byteArr;
+}
+var str = "中1";
+console.info(toGbkBytes(str));
+</script>
